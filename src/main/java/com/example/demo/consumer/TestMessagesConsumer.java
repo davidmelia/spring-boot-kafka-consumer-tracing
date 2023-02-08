@@ -16,8 +16,8 @@ public class TestMessagesConsumer {
   public Function<Flux<String>, Mono<Void>> testMessagesReactorKafkaBinder() {
     return events -> events.flatMapSequential(event -> {
 
-      log.info("Reactor Kafka Binder: This log statement has the trace id ={}", event);
-      return Mono.just("OK").delayElement(Duration.ofSeconds(1)).doOnSuccess(r -> log.info("Reactor Kafka Binder: This log statement does not have the trace id {}", r));
+      log.info("Reactor Kafka Binder: This log statement has the trace id");
+      return Mono.just("OK").delayElement(Duration.ofMillis(10)).doOnSuccess(r -> log.info("Reactor Kafka Binder: This log statement does not have the trace id"));
 
     }, 1).onErrorResume(ex -> {
       log.info("Error", ex);
@@ -29,8 +29,8 @@ public class TestMessagesConsumer {
   public Function<Flux<String>, Mono<Void>> testMessagesKafkaBinder() {
     return events -> events.flatMapSequential(event -> {
 
-      log.info("Kafka Binder: This log statement has the trace id ={}", event);
-      return Mono.just("OK").delayElement(Duration.ofSeconds(1)).doOnSuccess(r -> log.info("Kafka Binder: This log statement does not have the trace id {}", r));
+      log.info("Kafka Binder: This log statement has the trace id");
+      return Mono.just("OK").delayElement(Duration.ofMillis(10)).doOnSuccess(r -> log.info("Kafka Binder: This log statement does not have the trace id"));
 
     }, 1).onErrorResume(ex -> {
       log.info("Error", ex);
