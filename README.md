@@ -8,10 +8,10 @@ spring-boot-kafka-consumer-tracing
 3) you will get
 
 
-INFO [aid=spring-boot-kafka-consumer-tracing,tid=,sid=,cusname=][0;39m [35m95615[0;39m [2m---[0;39m [2m[-513d531fe388-1][0;39m [36mc.e.demo.consumer.TestMessagesConsumer  [0;39m [2m:[0;39m Reactor Kafka Binder: This log statement has the trace id
+2023-02-09T09:22:16.844Z  INFO [aid=spring-boot-kafka-consumer-tracing,tid=,sid=,cusname=] 36173 --- [-f567995d3b2a-1] c.e.demo.consumer.TestMessagesConsumer   : Reactor Kafka Binder: This log statement does not have the trace id
 
-INFO [aid=spring-boot-kafka-consumer-tracing,tid=63e3ab1ea59c918915034a79da332502,sid=e05816344a6df6d5,cusname=My Name][0;39m [35m95615[0;39m [2m---[0;39m [2m[container-0-C-1][0;39m [36mc.e.demo.consumer.TestMessagesConsumer  [0;39m [2m:[0;39m Kafka Binder: This log statement has the trace id
-
-INFO [aid=spring-boot-kafka-consumer-tracing,tid=,sid=,cusname=][0;39m [35m95615[0;39m [2m---[0;39m [2m[     parallel-4][0;39m [36mc.e.demo.consumer.TestMessagesConsumer  [0;39m [2m:[0;39m Kafka Binder: This log statement does not have the trace id
+2023-02-09T09:22:16.844Z  INFO [aid=spring-boot-kafka-consumer-tracing,tid=63e4bb48fde4e7bad38152c80451f3e1,sid=7a6ca04b1324a87c,cusname=My Name] 36173 --- [container-0-C-1] c.e.demo.consumer.TestMessagesConsumer   : Kafka Binder: This log statement has the trace id
 
-INFO [aid=spring-boot-kafka-consumer-tracing,tid=,sid=,cusname=][0;39m [35m95615[0;39m [2m---[0;39m [2m[     parallel-4][0;39m [36mc.e.demo.consumer.TestMessagesConsumer  [0;39m [2m:[0;39m Reactor Kafka Binder: This log statement does not have the trace id
+2023-02-09T09:22:16.854Z  INFO [aid=spring-boot-kafka-consumer-tracing,tid=,sid=,cusname=] 36173 --- [     parallel-4] c.e.demo.consumer.TestMessagesConsumer   : Reactor Kafka Binder: This log statement does not have the trace id
+
+2023-02-09T09:22:16.856Z  INFO [aid=spring-boot-kafka-consumer-tracing,tid=,sid=,cusname=] 36173 --- [     parallel-5] c.e.demo.consumer.TestMessagesConsumer   : Kafka Binder: This log statement does not have the trace id
