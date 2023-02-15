@@ -4,7 +4,6 @@ import jakarta.annotation.PostConstruct;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import reactor.core.publisher.Hooks;
-import reactor.core.publisher.Operators;
 
 @SpringBootApplication
 public class MicroserviceBApplication {
@@ -17,7 +16,7 @@ public class MicroserviceBApplication {
 
   @PostConstruct
   public void init() {
-    Hooks.onEachOperator(Operators.lift(ObservationContextSnapshotLifter.lifter()));
+    Hooks.enableAutomaticContextPropagation();
   }
 
 }
