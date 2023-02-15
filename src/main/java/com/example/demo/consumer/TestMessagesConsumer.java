@@ -1,16 +1,22 @@
 package com.example.demo.consumer;
 
+import io.micrometer.observation.ObservationRegistry;
 import java.time.Duration;
 import java.util.function.Function;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
+import reactor.core.observability.micrometer.Micrometer;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @Slf4j
 @Component
 public class TestMessagesConsumer {
+  
+  @Autowired
+  public ObservationRegistry or;
 
   @Bean
   public Function<Flux<String>, Mono<Void>> testMessagesReactorKafkaBinder() {
@@ -22,7 +28,7 @@ public class TestMessagesConsumer {
     }, 1).onErrorResume(ex -> {
       log.info("Error", ex);
       return Mono.empty();
-    }).then();
+    }).tap(Micrometer.observation(or)).then();
   }
 
   @Bean
@@ -35,7 +41,7 @@ public class TestMessagesConsumer {
     }, 1).onErrorResume(ex -> {
       log.info("Error", ex);
       return Mono.empty();
-    }).then();
+    }).tap(Micrometer.observation(or)).then();
   }
 
 }
