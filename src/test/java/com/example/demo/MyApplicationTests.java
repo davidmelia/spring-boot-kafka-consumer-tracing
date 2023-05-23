@@ -20,7 +20,7 @@ class MyApplicationTests {
 	void contextLoads() {
 	  webTestClient.get().uri("/home").exchange().expectStatus().isOk();
 	  Hooks.enableAutomaticContextPropagation();
-      webTestClient.get().uri("/home").exchange().expectStatus().is5xxServerError();	   
+      webTestClient.get().uri("/home").exchange().expectStatus().is5xxServerError();
 	}
 	
 
