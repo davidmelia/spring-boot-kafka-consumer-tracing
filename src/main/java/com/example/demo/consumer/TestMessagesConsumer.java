@@ -4,33 +4,20 @@ import java.time.Duration;
 import java.util.function.Function;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
-import org.springframework.stereotype.Component;
+import org.springframework.context.annotation.Configuration;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @Slf4j
-@Component
+@Configuration
 public class TestMessagesConsumer {
   
   @Bean
-  public Function<Flux<String>, Mono<Void>> testMessagesReactorKafkaBinder() {
-    return events -> events.flatMapSequential(event -> {
-
-      log.info("Reactor Kafka Binder: This log statement does not have the trace id");
-      return Mono.just("OK").delayElement(Duration.ofMillis(10)).doOnSuccess(r -> log.info("Reactor Kafka Binder: This log statement does not have the trace id"));
-
-    }, 1).onErrorResume(ex -> {
-      log.info("Error", ex);
-      return Mono.empty();
-    }).then();
-  }
-
-  @Bean
-  public Function<Flux<String>, Mono<Void>> testMessagesKafkaBinder() {
+  Function<Flux<String>, Mono<Void>> testMessagesKafkaBinder() {
     return events -> events.flatMapSequential(event -> {
 
       log.info("Kafka Binder: This log statement has the trace id");
-      return Mono.just("OK").delayElement(Duration.ofMillis(10)).doOnSuccess(r -> log.info("Kafka Binder: This log statement also has the trace id"));
+      return Mono.just("OK").delayElement(Duration.ofMillis(10)).doOnSuccess(r -> log.info("Kafka Binder: This log statement also has the trace id in boot 3.0.7 but NOT boot 3.0.8 or 3.0.9"));
 
     }, 1).onErrorResume(ex -> {
       log.info("Error", ex);
