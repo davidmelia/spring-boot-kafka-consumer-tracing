@@ -2,6 +2,7 @@ package com.example.demo;
 
 import static org.springframework.http.ResponseEntity.ok;
 
+import java.time.Duration;
 import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 import java.util.Map;
@@ -42,5 +43,13 @@ public class KafkaController {
 
   }
 
+  
+  @GetMapping(value = "/threadContextPreserved", produces = MediaType.APPLICATION_JSON_VALUE)
+  public Mono<ResponseEntity<Map<String, String>>> stuff() {
+    log.info("This log statement has the trace id");
+    return Mono.just(ok(Map.of("event sent=", "dave"))).delayElement(Duration.ofMillis(10)).doOnSuccess(r -> log.info("This log statement alsos has the trace id"));
+
+
+  }
 
 }

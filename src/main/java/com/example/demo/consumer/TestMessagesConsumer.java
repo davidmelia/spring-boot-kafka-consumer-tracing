@@ -16,13 +16,13 @@ public class TestMessagesConsumer {
   Function<Flux<String>, Mono<Void>> testMessagesKafkaBinder() {
     return events -> events.flatMapSequential(event -> {
 
-      log.info("Kafka Binder: This log statement has the trace id");
-      return Mono.just("OK").delayElement(Duration.ofMillis(10)).doOnSuccess(r -> log.info("Kafka Binder: This log statement also has the trace id in boot 3.0.8 but NOT in boot 3.0.9"));
+      log.info("This log statement has the trace id");
+      return Mono.just("OK").doOnNext(t -> log.info("This log statement also has the trace id")).delayElement(Duration.ofMillis(10)).doOnSuccess(r -> log.info("This log statement does not have the trace ID"));
 
     }, 1).onErrorResume(ex -> {
       log.info("Error", ex);
       return Mono.empty();
     }).then();
   }
-
+  
 }
